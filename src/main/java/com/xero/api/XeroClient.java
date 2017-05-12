@@ -83,11 +83,11 @@ public class XeroClient {
 		throw new XeroApiException(googleException.getStatusCode(),googleException.getContent());
 	}
 
-	protected Response get(String endPoint) throws IOException {
+	public Response get(String endPoint) throws IOException {
 		return get(endPoint, null, null);
 	}
 
-	protected Response get(String endPoint, Date modifiedAfter, Map<String,String> params) throws IOException {
+	public Response get(String endPoint, Date modifiedAfter, Map<String,String> params) throws IOException {
 		HttpResponse resp = null;
 
 		OAuthRequestResource req = new OAuthRequestResource(config, endPoint,"GET",null,params);
@@ -123,7 +123,7 @@ public class XeroClient {
 	}
 
 
-	protected String getFile(String endPoint, Date modifiedAfter, Map<String,String> params, String accept, String dirPath) throws IOException {
+	public String getFile(String endPoint, Date modifiedAfter, Map<String,String> params, String accept, String dirPath) throws IOException {
 		HttpResponse resp = null;
 		String saveFilePath = "";
 		OAuthRequestResource req = new OAuthRequestResource(config, endPoint,"GET",null,params, accept);
@@ -180,11 +180,11 @@ public class XeroClient {
 		}
 	}
 
-	protected Response put(String endPoint, JAXBElement<?> object)  {
+	public Response put(String endPoint, JAXBElement<?> object)  {
 		return put(endPoint, object, null);
 	}
 
-	protected Response put(String endPoint, JAXBElement<?> object, Map<? extends String, ?> params) {
+	public Response put(String endPoint, JAXBElement<?> object, Map<? extends String, ?> params) {
 		String contents = marshallRequest(object);
 
 		HttpResponse resp = null;
@@ -216,11 +216,11 @@ public class XeroClient {
 		}
 	}
 
-	protected Response put(String endPoint, String contentType, byte[] bytes) throws IOException {
+	public Response put(String endPoint, String contentType, byte[] bytes) throws IOException {
 		return put(endPoint, contentType, bytes, null);
 	}
 
-	protected Response put(String endPoint, String contentType, byte[] bytes, Map<? extends String, ?> params) throws IOException {
+	public Response put(String endPoint, String contentType, byte[] bytes, Map<? extends String, ?> params) throws IOException {
 		HttpResponse resp = null;
 		OAuthRequestResource req = new OAuthRequestResource(config, endPoint,"PUT", contentType, bytes, params);
 		req.setToken(token);
@@ -250,11 +250,11 @@ public class XeroClient {
 		}
 	}
 
-	protected Response put(String endPoint, String contentType, File file) throws IOException {
+	public Response put(String endPoint, String contentType, File file) throws IOException {
 		return put(endPoint, contentType, file, null);
 	}
 
-	protected Response put(String endPoint, String contentType, File file, Map<? extends String, ?> params) throws IOException {
+	public Response put(String endPoint, String contentType, File file, Map<? extends String, ?> params) throws IOException {
 		HttpResponse resp = null;
 		OAuthRequestResource req = new OAuthRequestResource(config, endPoint,"PUT", contentType, file, params);
 		req.setToken(token);
@@ -284,11 +284,11 @@ public class XeroClient {
 		}
 	}
 
-	protected Response post(String endPoint, JAXBElement<?> object) throws IOException {
+	public Response post(String endPoint, JAXBElement<?> object) throws IOException {
 		return post(endPoint, object, null);
 	}
 
-	protected Response post(String endPoint, JAXBElement<?> object, Map<? extends String, ?> params) throws IOException {
+	public Response post(String endPoint, JAXBElement<?> object, Map<? extends String, ?> params) throws IOException {
 	    String contents = marshallRequest(object);
 	    HttpResponse resp = null;
 		OAuthRequestResource req = new OAuthRequestResource(config, endPoint,"POST",contents, params);
@@ -319,7 +319,7 @@ public class XeroClient {
 		}
 	}
 
-	protected Response delete(String endPoint) throws IOException {
+	public Response delete(String endPoint) throws IOException {
 		HttpResponse resp = null;
 		OAuthRequestResource req = new OAuthRequestResource(config, endPoint,"DELETE",null,null);
 		req.setToken(token);
