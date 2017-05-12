@@ -4,7 +4,7 @@
 	<groupId>com.xero</groupId>
 	<artifactId>xero-java-sdk</artifactId>
 	<packaging>jar</packaging>
-	<version>0.4.1</version>
+	<version>0.4.1-GL</version>
 	<name>Xero-Java SDK</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
@@ -79,7 +79,7 @@
 						<include>**/*</include>
 					</includes>
 						<repositoryName>Xero-Java</repositoryName>
-						<repositoryOwner>XeroAPI</repositoryOwner>
+						<repositoryOwner>ohgoodlord</repositoryOwner>
 				</configuration>
 				<executions>
 					<execution>
