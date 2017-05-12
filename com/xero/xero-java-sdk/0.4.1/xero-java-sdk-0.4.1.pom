@@ -79,7 +79,7 @@
 						<include>**/*</include>
 					</includes>
 						<repositoryName>Xero-Java</repositoryName>
-						<repositoryOwner>XeroAPI</repositoryOwner>
+						<repositoryOwner>ohgoodlord</repositoryOwner>
 				</configuration>
 				<executions>
 					<execution>
