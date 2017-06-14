@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.ByteArrayInputStream;
 
 public class JsonConfig implements Config {
 
@@ -26,11 +27,17 @@ public class JsonConfig implements Config {
 	private String PATH_TO_PRIVATE_KEY_CERT;
 	private String PRIVATE_KEY_PASSWORD;
 	private int CONNECT_TIMEOUT = 60;
-		
+	private byte[] PRIVATE_KEY_CERT_CONTENT;
+
 	private String configFile;
 	
 	private static Config instance = null;
    
+	public JsonConfig(byte[] configFile, byte[] privateKeyCertContent) {
+		PRIVATE_KEY_CERT_CONTENT = privateKeyCertContent;
+		load(new ByteArrayInputStream(configFile));
+	}
+
 	public JsonConfig(String configFile) {
 		this.configFile = configFile;
 		load();
@@ -44,6 +51,10 @@ public class JsonConfig implements Config {
 			instance = new JsonConfig("config.json");
 		}
 	    return instance;
+	}
+
+	public InputStream getPrivateKeyCert() {
+		return new ByteArrayInputStream(PRIVATE_KEY_CERT_CONTENT);
 	}
 	
 	@Override
@@ -131,11 +142,15 @@ public class JsonConfig implements Config {
 		// in seconds
 		CONNECT_TIMEOUT = connectTimeout;
 	}
-	  
-	public void load() 
-	{
+
+	public void load() {
 		InputStream inputStream = JsonConfig.class.getResourceAsStream("/" + configFile);
-		InputStreamReader reader = new InputStreamReader(inputStream);
+		load(inputStream);
+	}
+	  
+	public void load(InputStream configFileInputStream)
+	{
+		InputStreamReader reader = new InputStreamReader(configFileInputStream);
 
 		JSONParser parser = new JSONParser();
 		  

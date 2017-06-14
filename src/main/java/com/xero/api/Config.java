@@ -1,5 +1,7 @@
 package com.xero.api;
 
+import java.io.InputStream;
+
 public interface Config {
 
     String getAppType();
@@ -25,6 +27,8 @@ public interface Config {
     String getAccept();
 
     String getRedirectUri();
+
+    InputStream getPrivateKeyCert();
     
     int getConnectTimeout();
     
