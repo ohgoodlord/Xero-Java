@@ -4,7 +4,7 @@
 	<groupId>com.xero</groupId>
 	<artifactId>xero-java-sdk</artifactId>
 	<packaging>jar</packaging>
-	<version>0.4.1-GL.2</version>
+	<version>0.4.1-GL.3</version>
 	<name>Xero-Java SDK</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
@@ -27,6 +27,11 @@
 			<groupId>com.xero</groupId>
 			<artifactId>xero-accounting-api-schema</artifactId>
 			<version>0.0.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.25</version>
 		</dependency>
 	</dependencies>
 	<repositories>
