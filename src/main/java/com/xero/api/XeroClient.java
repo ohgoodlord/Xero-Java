@@ -17,6 +17,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.io.File;
 import java.io.FileOutputStream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class XeroClient {
 
@@ -24,6 +26,8 @@ public class XeroClient {
 	private String token = null;
 	private String tokenSecret = null;
 	private static final int BUFFER_SIZE = 4096;
+
+	private static final Logger logger = LoggerFactory.getLogger(XeroClient.class);
 
 	protected static final DateFormat utcFormatter;
 	static
@@ -101,9 +105,21 @@ public class XeroClient {
 			resp = req.execute();
 			String r = resp.parseAsString();
 			return unmarshallResponse(r, Response.class);
-		} catch (IOException ioe) {
-			if (ioe instanceof HttpResponseException) {
-	            HttpResponseException googleException = (HttpResponseException)ioe;
+		} catch (Exception ex) {
+
+			logger.error(
+				"Failed to execute request, endpoint = " + endPoint,
+				ex
+			);
+
+			if (ex instanceof HttpResponseException) {
+	            HttpResponseException googleException = (HttpResponseException) ex;
+
+				logger.error(
+					"HttpResponseException, statusCode = " + googleException.getStatusCode() +
+					", content = " + googleException.getContent(),
+					googleException
+				);
 
 	            if (googleException.getStatusCode() == 400 ||
 	            		googleException.getStatusCode() == 401 ||
